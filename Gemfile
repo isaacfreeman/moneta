@@ -60,4 +60,5 @@ group :test do
   gem 'launchy'
   gem 'poltergeist'
   gem 'simplecov'
+  gem 'minitest-display'
 end
