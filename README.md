@@ -42,9 +42,8 @@ Admin URL
 * When a branch is ready for either staging or master, send a [Pull Request](https://github.com/ovenbits/cellucor.com/pull/new/master) detailing the changes made, any dependency updates, screenshots of updates if needed, and any other information to help with the merge.
 ### Code Standards
 #### Ruby
-Please observe the following general guidelines so we've got a clean and consistent code base.
+In general, try and follow the guidelines in the [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide).
 * Soft tabs, two spaces.
-* Alphabetize your method names when defining them. Omit unnecessary `return` declarations.
 * Use ruby 1.9 style hash syntax. `attr: value` not `:attr => value`
 * Keep external dependencies to a minimum. Only add gems if you must.
 * Create small, simple classes that have a single responsibility when at all possible.
@@ -52,7 +51,9 @@ Please observe the following general guidelines so we've got a clean and consist
 * Aim to write good tests for all classes. Testing is not as necessary for views, but use good judgement.
 * Set your text editor to remove trailing spaces, etc..
 * Use locales for text, even if the project will only ever be in English
-In general, try and follow the guidelines in the [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide).
+* Separate code that overrides Solidus from code the implements new features.
+  * Use spree subdirectories (`app/controllers/spree`, `app/models/spree` etc.) only for overriding files that also exist in Solidus.
+  * Use Deface to insert new admin view code.
 #### JavaScript
 #### Stylesheets
 ### Debugging
