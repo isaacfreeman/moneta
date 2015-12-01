@@ -25,3 +25,6 @@
 
 
 /config/database.yml
+.env
+.env.test
+.env.development
