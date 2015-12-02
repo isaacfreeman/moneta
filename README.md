@@ -1,36 +1,53 @@
-# Solidus Base Template
-A template for Solidus sites
+# Moneta
+A Resolve Digital template for Solidus sites, with the following goals:
+1. Quick set-up for new projects
+2. Reference implementations for features we expect to use with many clients
+
+# [Project Name]
 
 ## Set-up
 How to set up a dev environment for this project
 1. Clone the project
 2. Create a `database.yml` file and place it in config/ (You can probably just copy the `config/database.sample.yml` sample file.)
 3. Run `bundle install` to grab the gems.
-etc.
+...
+4. Log in to /admin with the default admin account:
+  spree@example.com / spree123
 
-## Admin user
-spree@example.com / spree123
-## Granting a User Access to Spree Admin
-
-Find the user and give him the Spree role.
-
-```
-u = User.find(5)
-u.spree_roles << Spree::Role.where(name:"admin").first
-```
+## [Client] Information
+### Primary contact
+[name] [email]
+### SKU format
+[document the normal formats client uses for SKUs]
 
 ## Hosting Environments
 ## Repository
-URL
+[URL]
 ### Staging
-URL
-Git remote
-Admin URL
+[URL]
+[Git remote]
+[Admin URL]
 ### Production
-URL
-Git remote
-Admin URL
+[URL]
+[Git remote]
+[Admin URL]
 ### Asset Hosting
+[Asset hosting info]
+
+## Project Notes
+### Integrations
+#### Email
+[notes]
+#### Mailing lists
+[notes]
+#### Fulfillment
+[notes]
+#### Analytics
+[notes]
+#### Search
+[notes]
+### Custom Features
+[notes]
 
 ## Working Protocols
 ### Branches
@@ -40,6 +57,7 @@ Admin URL
 * Rebase off of `master` often, and especially before submitting a pull request to make sure your feature branch has the latest hotness.
 * [Issues](https://github.com/ovenbits/cellucor.com/issues) should be created for all major features, bugs, discussions and other reasonably sized bits to work on. When possible, reference issue numbers in your commits and close issues with commits.
 * When a branch is ready for either staging or master, send a [Pull Request](https://github.com/ovenbits/cellucor.com/pull/new/master) detailing the changes made, any dependency updates, screenshots of updates if needed, and any other information to help with the merge.
+
 ### Code Standards
 #### Ruby
 In general, try and follow the guidelines in the [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide).
@@ -56,39 +74,27 @@ In general, try and follow the guidelines in the [Ruby Style Guide](https://gith
   * Use Deface to insert new admin view code.
 #### JavaScript
 #### Stylesheets
-### Debugging
-* Call 'byebug' anywhere in the code to stop execution and get a debugger console
-### Deploying
-* Use maintenance mode if...
-Deployment commands
-
-
-## Tests
+### Tests
 Models, services and other general classes should be tested. Helpers and views can be tested if possible, but not required.
-Run the testing suite by running:
+After running tests, code coverage will be available in the `coverage/index.html` file. Try and keep coverage above 95%.
+
+## How to...
+## Deploy to staging
+[command line notes]
+## Deploy to production
+[command line notes]
+## Run the test suite
 ```bash
 rake test
 ```
-After running tests, code coverage will be available in the `coverage/index.html` file. Try and keep coverage above 95%.
-
-
-
-## Integrations
-### Email
-### Mailing lists
-### Fulfillment
-### Analytics
-### Search
-
-## Client Information
-### Primary contact
-### SKU format
-
-## Custom Features
-
-## Working with Data
-### Pulling data from Production
-### Importing Products
+## Grant a User Access to Spree Admin
+```
+u = User.find(5)
+u.spree_roles << Spree::Role.where(name:"admin").first
+```
+## Pull data from Production
+[command line notes]
+## Import Products
 TODO
-### Importing Redirects
+## Import Redirects
 TODO
