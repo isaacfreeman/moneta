@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Algolia index to store product search information in
+  config.algolia_index = ENV['ALGOLIA_INDEX']
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

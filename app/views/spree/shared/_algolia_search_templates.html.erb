@@ -1,0 +1,133 @@
+<div class='container body' id='search_results' style='display: none'></div>
+
+<script id='algolia_search_template' type='text/x-handlebars-template'>
+  <div class="row">
+    <div class="col col-xs-12 col-sm-3" id="sidebar">
+      <div class="facets-wrapper">
+        <div id="facets">
+          {{#each content.facets}}
+            <h4>{{@key}}</h4>
+            <ul>
+              {{#each this}}
+                <li>
+                  <a href='#' facet='categories' value='{{@key}}' class='facet'>
+                    {{@key}} ({{this}})
+                    <span class='clear'>clear</span>
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="col col-xs-12 col-sm-9">
+      <div class="hits-wrapper">
+        <h4>Search results for: '{{content.query}}'</h4>
+        {{#if content.hits}}
+          <ul id="hits" class="product-list">
+            {{#each content.hits}}
+              <li class='product-item row'>
+                <div class='col-xs-3'>
+                  {{#if main_image_url}}
+                    <a href='/products/{{permalink}}'>
+                      <img class='product-image img-responsive' src='{{main_image_url}}'>
+                    </a>
+                  {{/if}}
+                </div>
+                <div class='col-xs-9'>
+                  <h4>
+                    <a href='/products/{{permalink}}' class='info'>{{name}}</a>
+                  </h4>
+                  <div class='short-desc'>
+                    {{#if formatted_short_description}}
+                      <p>{{{formatted_short_description}}}</p>
+                    {{/if}}
+                    {{#unless variant_hash}}
+                      <a href='/products/{{permalink}}' class="btn btn-primary btn-buy_now">Buy Now</a>
+                      {{#if option_values}}
+                        <p>
+                          <strong>Available in:</strong>
+                          {{#each option_values}}
+                            {{{this}}}<span class='separator'>,</span>
+                          {{/each}}
+                        </p>
+                      {{/if}}
+                    {{/unless}}
+                  </div>
+                </div>
+                {{#if variant_hash}}
+                  <form accept-charset="UTF-8" action="/orders/populate" data-remote="true" method="post">
+                    <input name="utf8" type="hidden" value="✓">
+                    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                    <div class="col-xs-12">
+                      <div class="msg-invalid"><span>Please indicate a quantity</span></div>
+                      <table class="table table-variants">
+                        <colgroup>
+                          <col style="width: 10%">
+                          <col style="width: 70%">
+                          <col style="width: 10%">
+                          <col style="width: 10%">
+                        </colgroup>
+                        <tbody>
+                          <tr>
+                            <th class="sku">SKU</th>
+                            <th class="name">Product</th>
+                            <th class="price">Price</th>
+                            <th class='qty'>Qty</th>
+                          </tr>
+                          {{#each variant_hash}}
+                            <tr id="variant-row-{{{id}}}" class="odd">
+                              <td>{{{sku}}}</td>
+                              <td>
+                                <strong>{{{name}}}</strong>
+                                <br>
+                                {{{options}}}
+                              </td>
+                              <td class="variant price cart-price" data-variant_id="{{ id }}">
+                                {{{price}}}
+                              </td>
+                              {{#if disabled}}
+                                <td class="qty">
+                                  <span class="label label-warning label-out_of_stock"><%= t("out_of_stock") %></span>
+                                </td>
+                              {{else}}
+                                <td class="qty">
+                                  <div class="form-group">
+                                    <input class="qty form-control" data-total-on-hand="Infinity" id="variants_{{{id}}}" name="variants[{{{id}}}]" type="number" value="">
+                                  </div>
+                                </td>
+                              {{/if}}
+                            </tr>
+                          {{/each}}
+                          <tr>
+                            <td colspan="4">
+                              {{#if can_supply?}}
+                                <button type="submit" class="btn btn-primary btn-add_to_cart" data-disable-with="Adding...">
+                                  Add
+                                </button>
+                              {{/if}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </form>
+                {{/if}}
+              </li>
+            {{/each}}
+          </ul>
+
+          <div id='pagination'>
+            <p class='pages'>
+              <a id='previous-page'>« Previous Page</a>
+              <a id='next-page'>Next Page »</a>
+            </p>
+          </div>
+        {{else}}
+          <p>No results found. Try a different search.</p>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</script>

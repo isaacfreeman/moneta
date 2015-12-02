@@ -30,11 +30,9 @@ gem 'solidus_auth_devise'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Feature: Algolia Search
+gem 'rdiscount' # Markdown Parser
+gem 'algoliasearch-rails'
 
 group :development, :test do
   gem 'awesome_print'
@@ -44,6 +42,7 @@ group :development, :test do
   gem 'i18n-tasks'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'pry-remote'
 end
 
 group :development do
