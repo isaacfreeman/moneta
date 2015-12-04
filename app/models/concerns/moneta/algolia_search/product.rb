@@ -2,7 +2,7 @@ module Moneta::AlgoliaSearch::Product
   extend ActiveSupport::Concern
 
   included do
-    include AlgoliaSearch
+    include ::AlgoliaSearch
     algoliasearch unless: :deleted?, index_name: Rails.configuration.algolia_index do
       add_attribute :categories,
                     :main_image_url,

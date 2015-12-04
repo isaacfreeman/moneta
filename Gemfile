@@ -30,6 +30,8 @@ gem 'solidus_auth_devise'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'ruby_flipper'
+
 # Feature: Algolia Search
 gem 'rdiscount' # Markdown Parser
 gem 'algoliasearch-rails'

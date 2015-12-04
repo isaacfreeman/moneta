@@ -13,6 +13,7 @@ How to set up a dev environment for this project
     ALGOLIA_APPLICATION_ID
     ALGOLIA_ADMIN_API_KEY
     ALGOLIA_SEARCH_API_KEY
+5. Edit `config/features.rb` to toggle desired features
 5. Update `algolia_search.js.coffee.erb` to use the correct Algolia search API key
 
 ## Admin user

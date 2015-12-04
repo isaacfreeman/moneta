@@ -58,37 +58,36 @@ jQuery ->
     $('#next-page').toggle(content.page < content.nbPages - 1)
     return
 
+  performSearch = (query, lastQuery) ->
+    $('#search-bar #keywords').data('latest-query', query)
+    queryIsEmpty = query is ''
+    queryIsUnchanged = (lastQuery == query)
+    $('#wrapper').toggle(queryIsEmpty)
+    $('#search_results').toggle(!queryIsEmpty)
+    unless queryIsEmpty or queryIsUnchanged
+      algoliaHelper.search query, searchCallback, maxValuesPerFacet: 30
+
   $('#search-bar #keywords').closest('form').submit (e) ->
     e.preventDefault()
     lastQuery = $('#search-bar #keywords').data('latest-query')
-
     query = $.trim($('#search-bar #keywords').val())
-    $('#search-bar #keywords').data('latest-query', query)
+    performSearch(query, lastQuery)
 
-    queryIsEmpty = query is ''
-    queryIsUnchanged = (lastQuery == query)
-
-    $('#wrapper').toggle(queryIsEmpty)
-    $('#search_results').toggle(!queryIsEmpty)
-
-    unless queryIsEmpty or queryIsUnchanged
-      algoliaHelper.search query, searchCallback, maxValuesPerFacet: 30
 
   $('#search-bar #keywords').keyup( ->
     lastQuery = $(this).data('latest-query')
-
     query = $.trim($(this).val())
-    $(this).data('latest-query', query)
-
-    queryIsEmpty = query is ''
-    queryIsUnchanged = (lastQuery == query)
-
-    $('#wrapper').toggle(queryIsEmpty)
-    $('#search_results').toggle(!queryIsEmpty)
-
-    unless queryIsEmpty or queryIsUnchanged
-      algoliaHelper.search query, searchCallback, maxValuesPerFacet: 30
+    performSearch(query, lastQuery)
   ).focus()
+
+  # Link that triggers an Algolia search
+  #  e.g. on 404 page, to search for last part of URL
+  $('a.algolia-search-link').click (e) ->
+    e.preventDefault()
+    query=$(this).find('.query').text()
+    lastQuery = $('#search-bar #keywords').data('latest-query')
+    $('#search-bar #keywords').val(query)
+    performSearch(query, lastQuery)
 
   $(document).on 'click', '.facet', ->
     facet = $(this).attr('facet')
