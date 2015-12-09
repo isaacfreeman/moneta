@@ -24,6 +24,8 @@
           <%= yield %>
         </div>
 
+        <%= render 'spree/shared/algolia_search_template' if feature_active?(:algolia_search) %>
+
         <%= yield :templates %>
 
       </div>
@@ -32,7 +34,6 @@
 
     </div>
 
-    <%= render 'spree/shared/algolia_search_template' if feature_active?(:algolia_search) %>
     <%= render :partial => 'spree/shared/google_analytics' %>
   </body>
 </html>

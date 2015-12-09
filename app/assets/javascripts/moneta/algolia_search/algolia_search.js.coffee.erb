@@ -62,7 +62,7 @@ jQuery ->
     $('#search-bar #keywords').data('latest-query', query)
     queryIsEmpty = query is ''
     queryIsUnchanged = (lastQuery == query)
-    $('#wrapper').toggle(queryIsEmpty)
+    $('#content').toggle(queryIsEmpty)
     $('#search_results').toggle(!queryIsEmpty)
     unless queryIsEmpty or queryIsUnchanged
       algoliaHelper.search query, searchCallback, maxValuesPerFacet: 30

@@ -4,15 +4,16 @@ module Moneta::AlgoliaSearch::Product
   included do
     include ::AlgoliaSearch
     algoliasearch unless: :deleted?, index_name: Rails.configuration.algolia_index do
-      add_attribute :categories,
-                    :main_image_url,
+      add_attribute :can_supply?,
+                    :categories,
                     :description,
+                    :display_price,
+                    :has_variants?,
+                    :main_image_url,
                     :option_values,
                     :sku,
-                    :variant_skus,
                     :variant_hash,
-                    :has_variants?,
-                    :can_supply?
+                    :variant_skus
     end
     # Remove products from Algolia search index when they're marked as deleted
     alias_method :spree_delete, :delete

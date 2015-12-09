@@ -1,1 +1,1 @@
-feature :algolia_search, false
+feature :algolia_search, true
