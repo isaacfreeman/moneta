@@ -44,6 +44,12 @@ GEM
     acts_as_list (0.7.2)
       activerecord (>= 3.0)
     addressable (2.3.8)
+    algoliasearch (1.6.1)
+      httpclient (~> 2.4)
+      json (>= 1.5.1)
+    algoliasearch-rails (1.14.1)
+      algoliasearch (>= 1.2.14)
+      json (>= 1.5.1)
     arel (6.0.3)
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
@@ -128,6 +134,7 @@ GEM
       activesupport (>= 4.1.0)
     highline (1.6.21)
     htmlentities (4.3.4)
+    httpclient (2.7.0.1)
     i18n (0.7.0)
     i18n-tasks (0.8.6)
       activesupport
@@ -201,6 +208,9 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    pry-remote (0.1.8)
+      pry (~> 0.9)
+      slop (~> 3.0)
     rabl (0.11.6)
       activesupport (>= 2.3.14)
     rack (1.6.4)
@@ -237,9 +247,11 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.2)
+    rdiscount (2.1.8)
     rdoc (4.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    ruby_flipper (0.0.5)
     sass (3.4.14)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -370,6 +382,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  algoliasearch-rails
   awesome_print
   better_errors
   binding_of_caller
@@ -386,7 +399,10 @@ DEPENDENCIES
   poltergeist
   pry-byebug
   pry-rails
+  pry-remote
   rails (= 4.2.5)
+  rdiscount
+  ruby_flipper
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simplecov

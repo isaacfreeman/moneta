@@ -1,0 +1,98 @@
+jQuery ->
+  algolia = new AlgoliaSearch('5E3H5I2H1T', '2971505467fd086972dfeb86b7e85077')
+  algoliaHelper = new AlgoliaSearchHelper algolia, '<%= Rails.configuration.algolia_index %>',
+                                           facets: ['categories']
+                                      hitsPerPage: 10
+
+  templateSource = $('#algolia_search_template').html()
+  searchTemplate = Handlebars.compile(templateSource)
+
+  descriptionWithSearch = (description, keywordsMatch) ->
+    return '' unless description
+
+    textDescription = description.replace(/(<([^>]+)>)/ig,'')
+    excerptMatch = ///(\b\w.)?(#{keywordsMatch})(.w)?\b///i
+
+    # disabling this feature for now as it's not quite right
+    dynamicDescription = no
+
+    if (matches = textDescription.match(excerptMatch)) and dynamicDescription
+      return matches.join('...')
+    else
+      return textDescription.substring(0, 90) + "..."
+
+  productOptionsWithSearch = (options, keywordsMatch) ->
+    return options if options.length < 8
+
+    matchingValues = []
+
+    for option in options
+      if ///(#{keywordsMatch})///i.test(option)
+        matchingValues.push(option)
+
+    if matchingValues.length > 0
+      matchingValues = $.unique(matchingValues)
+      matchingValues.push('and more options.')
+      return matchingValues
+    else
+      return []
+
+  searchCallback = (success, content) ->
+    keywordsMatch = $.trim(content.query).split(' ').join('|')
+
+    for hit in content['hits']
+      hit.formatted_short_description = descriptionWithSearch(hit.formatted_short_description, keywordsMatch)
+      hit.option_values = productOptionsWithSearch(hit.option_values, keywordsMatch)
+
+    results = $('#search_results')
+    results.html searchTemplate({content: content})
+    results.unhighlight()
+    results.highlight(content.query.split(' '))
+
+    $('.facet').each ->
+      facet = $(this).attr('facet')
+      value = $(this).attr('value')
+      $(this).toggleClass('refined', algoliaHelper.isRefined(facet, value))
+
+    $('#previous-page').toggle(content.page > 0)
+    $('#next-page').toggle(content.page < content.nbPages - 1)
+    return
+
+  performSearch = (query, lastQuery) ->
+    $('#search-bar #keywords').data('latest-query', query)
+    queryIsEmpty = query is ''
+    queryIsUnchanged = (lastQuery == query)
+    $('#content').toggle(queryIsEmpty)
+    $('#search_results').toggle(!queryIsEmpty)
+    unless queryIsEmpty or queryIsUnchanged
+      algoliaHelper.search query, searchCallback, maxValuesPerFacet: 30
+
+  $('#search-bar #keywords').closest('form').submit (e) ->
+    e.preventDefault()
+    lastQuery = $('#search-bar #keywords').data('latest-query')
+    query = $.trim($('#search-bar #keywords').val())
+    performSearch(query, lastQuery)
+
+
+  $('#search-bar #keywords').keyup( ->
+    lastQuery = $(this).data('latest-query')
+    query = $.trim($(this).val())
+    performSearch(query, lastQuery)
+  ).focus()
+
+  # Link that triggers an Algolia search
+  #  e.g. on 404 page, to search for last part of URL
+  $('a.algolia-search-link').click (e) ->
+    e.preventDefault()
+    query=$(this).find('.query').text()
+    lastQuery = $('#search-bar #keywords').data('latest-query')
+    $('#search-bar #keywords').val(query)
+    performSearch(query, lastQuery)
+
+  $(document).on 'click', '.facet', ->
+    facet = $(this).attr('facet')
+    value = $(this).attr('value')
+    algoliaHelper.toggleRefine(facet, value)
+
+  $(document).on 'click', '#next-page', -> algoliaHelper.nextPage()
+  $(document).on 'click', '#previous-page', -> algoliaHelper.previousPage()

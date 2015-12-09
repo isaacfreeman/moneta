@@ -31,6 +31,8 @@ Spree.config do |config|
   # Template to use when rendering layout
   # config.layout = "spree/layouts/spree_application"
 
+  # Products per page for pagination
+  # config.products_per_page = 5
 
   # Admin:
 

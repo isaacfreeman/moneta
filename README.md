@@ -10,8 +10,16 @@ How to set up a dev environment for this project
 1. Clone the project
 2. Create a `database.yml` file and place it in config/ (You can probably just copy the `config/database.sample.yml` sample file.)
 3. Run `bundle install` to grab the gems.
-...
-4. Log in to /admin with the default admin account:
+4. Set up env variables:
+    DEV_SECRET_KEY_BASE
+    TEST_SECRET_KEY_BASE
+    ALGOLIA_INDEX
+    ALGOLIA_APPLICATION_ID
+    ALGOLIA_ADMIN_API_KEY
+    ALGOLIA_SEARCH_API_KEY
+5. Edit `config/features.rb` to toggle desired features
+6. Update `algolia_search.js.coffee.erb` to use the correct Algolia search API key
+7. Log in to /admin with the default admin account:
   spree@example.com / spree123
 
 ## [Client] Information
