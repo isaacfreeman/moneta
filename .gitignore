@@ -29,3 +29,5 @@
 .env.test
 .env.development
 .byebug_history
+.rspec
+coverage

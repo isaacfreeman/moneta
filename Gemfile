@@ -40,8 +40,10 @@ group :development, :test do
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
+  gem 'ffaker'
   gem 'i18n-tasks'
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -57,11 +59,11 @@ group :development do
 end
 
 group :test do
-  gem 'minitest-rails-capybara'
+  gem 'rspec-rails'
+  gem 'capybara'
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'poltergeist'
-  gem 'simplecov'
-  gem 'minitest-display'
+  gem 'simplecov', :require => false
 end
