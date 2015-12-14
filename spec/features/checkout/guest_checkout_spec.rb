@@ -10,17 +10,15 @@ feature 'Guest checkout' do
   end
 
   scenario 'purchase a product', js: true do
-    # TODO: move adding to cart to a separate test that covers other product
-    #       page stuff, and start this test with a pre-loaded cart
+    # TODO: start this test with a pre-loaded cart
     visit '/products/example_product'
-    expect(page).to have_content('Example Product')
     page.click_button('Add To Cart')
 
     # Default Solidus goes directly to cart on add, but often we'll want to
     # add to cart with AJAX, then visit the cart as a separate step
     visit '/cart'
     expect(page).to have_content('Shopping Cart')
-    expect(find('#line_items')).to have_content('Example Product')
+
     # TODO: Modify quantity, remove item
 
     page.click_button('Checkout')
