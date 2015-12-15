@@ -1,0 +1,5 @@
+<% if feature_active?(:edit_buttons) %>
+  <div class='edit_buttons'>
+    <%= link_to_with_icon 'edit', 'Edit Variant', edit_admin_taxonomy_url(taxonomy), :no_text => true, 'data-no-turbolink' => true if can?(:update, taxonomy) %>
+  </div>
+<% end %>

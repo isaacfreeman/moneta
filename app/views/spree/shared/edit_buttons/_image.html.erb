@@ -1,0 +1,8 @@
+<% if feature_active?(:edit_buttons) %>
+  <div class='edit_buttons'>
+    <% if !defined?(image) || !image %>
+      <% image = @product.display_image %>
+    <% end %>
+    <%= link_to_with_icon 'edit', 'Edit Image', edit_admin_product_image_url(@product, image.id), :no_text => true, 'data-no-turbolink' => true, :data => {:action => 'edit'} if can?(:update, image) %>
+  </div>
+<% end %>
