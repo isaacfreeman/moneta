@@ -1,5 +1,5 @@
 <% if feature_active?(:edit_buttons) %>
   <div class='edit_buttons'>
-    <%= link_to_with_icon 'tasks', 'Edit Product Properties', admin_product_product_properties_url(@product), :no_text => true, 'data-no-turbolink' => true if can?(:admin, Spree::ProductProperty) %>
+    <%= link_to_with_icon 'tasks', 'Edit Product Properties', admin_product_product_properties_url(@product), no_text: true, data: {action: 'edit', no_turbolink: true} if can?(:admin, Spree::ProductProperty) %>
   </div>
 <% end %>

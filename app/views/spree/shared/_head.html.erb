@@ -6,9 +6,11 @@
 <%= canonical_tag(current_store.url) %>
 <%= favicon_link_tag 'favicon.ico' %>
 <%= stylesheet_link_tag 'application', :media => 'screen' %>
+<%= stylesheet_link_tag 'moneta/edit_buttons/manifest', :media => 'screen' if feature_active?(:edit_buttons) %>
 <%= csrf_meta_tags %>
 <%= javascript_include_tag 'application' %>
 <%= javascript_include_tag 'moneta/algolia_search/manifest' if feature_active?(:algolia_search) %>
+<%= javascript_include_tag 'moneta/edit_buttons/manifest' if feature_active?(:edit_buttons) %>
 <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
 <![endif]-->

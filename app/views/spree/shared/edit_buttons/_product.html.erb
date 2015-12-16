@@ -1,7 +1,7 @@
 <% product ||= @product %>
 <% if feature_active?(:edit_buttons) && product && !product.deleted? %>
   <div class='edit_buttons'>
-    <%= link_to_with_icon 'edit', 'Edit Product', edit_admin_product_url(product), :no_text => true, 'data-no-turbolink' => true if can?(:edit, product) %>
-    <%= link_to_with_icon 'cubes', Spree.t(:stock_management), admin_product_stock_url(product), :no_text => true, 'data-no-turbolink' => true if can?(:admin, Spree::StockItem) %>
+    <%= link_to_with_icon 'edit', 'Edit Product', edit_admin_product_url(product), no_text: true, data: {action: 'edit', no_turbolink: true} if can?(:edit, product) %>
+    <%= link_to_with_icon 'cubes', Spree.t(:stock_management), admin_product_stock_url(product), no_text: true, data: {action: 'edit', no_turbolink: true} if can?(:admin, Spree::StockItem) %>
   </div>
 <% end %>
