@@ -1,0 +1,3 @@
+<% if feature_active?(:view_buttons) %>
+  <li><%= button_link_to Spree.t(:view_product), product_url(@product), :icon => 'eye' %></li>
+<% end %>
