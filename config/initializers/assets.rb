@@ -13,3 +13,4 @@ Rails.application.config.assets.version = '1.0'
 # TODO: Only precompile if :algolia_search feature is active
 Rails.application.config.assets.precompile += %w( moneta/algolia_search/manifest.js )
 Rails.application.config.assets.precompile += %w( moneta/edit_buttons/manifest.js moneta/edit_buttons/manifest.css )
+Rails.application.config.assets.precompile += %w( moneta/menus/manifest.js moneta/menus/manifest.css )

@@ -1,0 +1,25 @@
+// Minimal dropdown menu code.
+// This will typically be replaced by a frontend framework like Bootstrap
+.dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  background: white;
+  border: solid 1px #d9d9db;
+  display: none;
+  left: 0;
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+}
+.menu-primary {
+  .navbar-nav {
+    float: left;
+    width: 100%;
+    >li {
+      float: left;
+      list-style: none;
+      margin-right: 1em;
+    }
+  }
+}
