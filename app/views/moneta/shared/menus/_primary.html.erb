@@ -1,0 +1,33 @@
+<!-- TODO: config setting to specify menu taxon -->
+<% if taxonomy = Spree::Taxonomy.includes(:root).find_by_name('Categories') %>
+  <nav class='menu menu-primary' >
+    <%= render partial: 'moneta/shared/edit_buttons/taxonomy', locals: {taxonomy: taxonomy}%>
+    <% cache(taxonomy.cache_key) do %>
+      <ul class="nav navbar-nav">
+        <% taxonomy.root.children.includes(:children).each_with_index do |level1_taxon, i| %>
+          <%= content_tag(:li, :id => level1_taxon.name.to_url, class: "dropdown") do %>
+            <%= link_to spree.nested_taxons_path(level1_taxon.permalink), class: 'dropdown-toggle', data: {toggle: 'dropdown'}, role: 'button', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' do %>
+              <%= level1_taxon.name %>
+            <% end %>
+            <div class="row dropdown-menu">
+              <% level1_taxon.children.includes(:children).each do |level2_taxon| %>
+                <div class="category">
+                  <%= link_to level2_taxon.name, spree.nested_taxons_path(level2_taxon.permalink), class: 'heading' %>
+                  <ul>
+                    <% level2_taxon.children.each do |level3_taxon| %>
+                      <% if level3_taxon.has_active_products? %>
+                        <li>
+                          <%= link_to level3_taxon.name, spree.nested_taxons_path(level3_taxon.permalink) %>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  </nav>
+<% end %>
