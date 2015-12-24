@@ -8,7 +8,8 @@ $border-radius:                  3px !default;
 #product-variants li,
 #main-image,
 [data-hook='product_properties'],
-.taxonomy-root {
+.taxonomy-root,
+.menu {
   position: relative;
 }
 .edit_buttons {
