@@ -1,0 +1,108 @@
+$color-2:                        #9FC820 !default;    // Green
+$color-3:                        #5498DA !default;    // Light Blue
+$color-success:                  $color-2 !default;
+$border-radius:                  3px !default;
+
+[data-hook='products_list_item'],
+[data-hook='product_show'],
+#product-variants li,
+#main-image,
+[data-hook='product_properties'],
+.taxonomy-root,
+.menu {
+  position: relative;
+}
+.edit_buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.edit_buttons [class*='fa-'].no-text {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  background-color: #f3f8fc;
+  border-radius: 15px;
+  border: 1px solid #cee1f4;
+  box-sizing: border-box;
+  color: $color-3;
+  display: inline-block;
+  font-size: 120%;
+  font-size: 14px;
+  height: 29px;
+  line-height: 14px;
+  padding-top: 6px;
+  text-decoration: none;
+  width: 29px;
+}
+.edit_buttons [class*='fa-'].no-text:visited {
+  color: $color-3;
+}
+.edit_buttons [class*='fa-'].no-text:hover {
+  border-color: transparent;
+  background-color: $color-2;
+  color: #FFFFFF;
+}
+.edit_buttons [class*='fa-'].no-text:before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center !important;
+  width: 27px;
+}
+
+#powerTip {
+  background-color: $color-3;
+  padding: 5px 15px;
+  border-radius: $border-radius;
+
+  &.n:before, &.ne:before, &.nw:before {
+    border-top-width: 5px;
+    border-top-color: $color-3;
+    bottom: -5px;
+  }
+
+  &.e:before {
+    border-right-width: 5px;
+    border-right-color: $color-3;
+    left: -5px;
+  }
+  &.s:before, &.se:before, &.sw:before {
+    border-bottom-width: 5px;
+    border-bottom-color: $color-3;
+    top: -5px;
+  }
+  &.w:before {
+    border-left-width: 5px;
+    border-left-color: $color-3;
+    right: -5px;
+  }
+  &.ne:before, &.se:before {
+    border-right-width: 5px;
+    border-right-color: $color-3;
+    left: -5px;
+  }
+  &.nw:before, &.sw:before {
+    border-left-width: 5px;
+    border-right-color: $color-3;
+    right: -5px;
+  }
+
+  &.edit {
+    background-color: $color-success;
+
+    &.n:before, &.ne:before, &.nw:before {
+      border-top-color: $color-success;
+    }
+    &.e:before, &.nw:before, &.sw:before {
+      border-right-color: $color-success;
+    }
+    &.s:before, &.se:before, &.sw:before {
+      border-bottom-color: $color-success;
+    }
+    &.w:before {
+      border-left-color: $color-success;
+    }
+  }
+}

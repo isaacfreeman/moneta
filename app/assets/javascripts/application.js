@@ -15,5 +15,3 @@
 //= require turbolinks
 
 //= require spree/frontend
-
-//= require_tree .

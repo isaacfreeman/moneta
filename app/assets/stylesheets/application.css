@@ -12,6 +12,5 @@
  *
  *= require spree/frontend
  *
- *= require_tree .
  *= require_self
  */

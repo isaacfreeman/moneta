@@ -14,6 +14,7 @@
       <%= render :partial => 'spree/shared/header' %>
 
       <div id="wrapper" class="row" data-hook>
+        <%= render :partial => 'moneta/shared/menus/primary' if feature_active?(:menus) %>
 
         <%= breadcrumbs(@taxon) %>
 
@@ -24,7 +25,7 @@
           <%= yield %>
         </div>
 
-        <%= render 'spree/shared/algolia_search_template' if feature_active?(:algolia_search) %>
+        <%= render 'moneta/shared/algolia_search_template' if feature_active?(:algolia_search) %>
 
         <%= yield :templates %>
 
