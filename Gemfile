@@ -23,6 +23,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'lograge'
 
 gem 'solidus'
 gem 'solidus_auth_devise'
@@ -35,6 +36,9 @@ gem 'ruby_flipper'
 # Feature: Algolia Search
 gem 'rdiscount' # Markdown Parser
 gem 'algoliasearch-rails'
+
+# Feature CSV Import
+gem 'smarter_csv'
 
 group :development, :test do
   gem 'awesome_print'
