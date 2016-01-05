@@ -1,7 +1,8 @@
 # [Project Name]
 
 ## Dev Set-up
-How to set up a dev environment for this project
+How to set up a dev environment for this project:
+
 1. Clone the project
 2. Create a `database.yml` file and place it in config/ (You can probably just copy the `config/database.sample.yml` sample file.)
 3. Run `bundle install` to grab the gems.
