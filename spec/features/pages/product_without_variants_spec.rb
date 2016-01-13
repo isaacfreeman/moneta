@@ -9,7 +9,6 @@ feature 'Guest checkout' do
     scenario 'visit page and add to cart', js: true do
       visit '/products/example_product'
       expect(page).to have_content('Example Product')
-      binding.pry
       page.click_button('Add To Cart')
 
       visit '/cart'
