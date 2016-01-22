@@ -17,22 +17,21 @@ module Moneta
 
       def to_algolia_hash
         {
-          'sku' => sku,
-          'title' => title,
-          'name' => product.name,
-          'options' => options_text,
-          'disabled' => !in_stock?,
-          'stock_on_hand' => total_on_hand.to_s,
-          'id' => id,
-          'price' => display_price.to_s
+          "sku" => sku,
+          "title" => title,
+          "name" => product.name,
+          "options" => options_text,
+          "disabled" => !in_stock?,
+          "stock_on_hand" => total_on_hand.to_s,
+          "id" => id,
+          "price" => display_price.to_s
         }
       end
 
       private
 
       def title
-        option_list_text = options_list.present? ? " (#{options_text})" : ''
-        "#{product.name}#{option_list_text}"
+        is_master? ? name : name + " - " + options_text
       end
     end
   end

@@ -34,7 +34,18 @@
 #     enabled: false
 
 ### Excluding directories
-
 # Directories below will not be scanned at all
 exclude_paths:
-  - db/migrate
+  - /Users/isaacfreeman/Sites/resolve/moneta/db/migrate
+
+# Recommended Rails settings
+"/Users/isaacfreeman/Sites/resolve/moneta/app/controllers":
+  IrresponsibleModule:
+    enabled: false
+  NestedIterators:
+    max_allowed_nesting: 2
+"/Users/isaacfreeman/Sites/resolve/moneta/app/helpers":
+  IrresponsibleModule:
+    enabled: false
+  UtilityFunction:
+    enabled: false

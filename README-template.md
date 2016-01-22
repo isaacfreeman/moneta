@@ -1,7 +1,8 @@
 # [Project Name]
 
-## Set-up
-How to set up a dev environment for this project
+## Dev Set-up
+How to set up a dev environment for this project:
+
 1. Clone the project
 2. Create a `database.yml` file and place it in config/ (You can probably just copy the `config/database.sample.yml` sample file.)
 3. Run `bundle install` to grab the gems.
@@ -17,6 +18,10 @@ How to set up a dev environment for this project
 6. Update `algolia_search.js.coffee.erb` to use the correct Algolia search API key
 7. Log in to /admin with the default admin account:
   spree@example.com / spree123
+
+## Production Set-up (for Heroku)
+1. Provision a Heroku instance
+2. If using the `:algoliasearch` feature, provision the Algolia add-on https://elements.heroku.com/addons/algoliasearch
 
 ## [Client] Information
 ### Primary contact

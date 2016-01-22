@@ -1,5 +1,6 @@
 # Helper methods that will be used widely across the application
-module ApplicationHelper
+module MonetaHelper
+  # Borrowed from https://github.com/thoughtbot/flutie/blob/master/lib/flutie/body_class_helper.rb
   def moneta_body_class(options = {})
     extra_body_classes_symbol = options[:extra_body_classes_symbol] || :extra_body_classes
     qualified_controller_name = controller.controller_path.gsub('/','-')
