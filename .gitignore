@@ -31,3 +31,4 @@
 .byebug_history
 .rspec
 coverage
+/public/spree
