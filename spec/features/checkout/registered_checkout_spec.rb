@@ -32,7 +32,6 @@ feature "Guest checkout" do
     end
 
     expect(page).to have_content("Checkout")
-    binding.pry
     within "#billing" do
       fill_in("First Name", with: "Test")
       fill_in("Last Name", with: "Test")

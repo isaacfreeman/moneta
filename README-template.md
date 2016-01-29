@@ -103,7 +103,10 @@ u.spree_roles << Spree::Role.where(name:"admin").first
 ```
 ## Pull data from Production
 [command line notes]
-## Import Products
-TODO
+## Import Products from CSV
+```
+rake csv:import:products path_to_csv_file.csv
+```
+
 ## Import Redirects
 TODO
