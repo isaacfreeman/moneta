@@ -7,6 +7,7 @@ A Resolve Digital template for Solidus sites, with the following goals:
 1. Algolia search
 2. Checkout specs
 3. Edit buttons on the front end for admins
+4. Import products from CSV
 
 ## Notes
 - Features are built against standard Solidus. In particular, we sometimes rely on the presence of HTML classes and ids from Solidus-frontend views, which may have been changed in client projects. In general, we recommend retaining ids, data-hooks and semantically meaningful classes from Solidus when overriding views.

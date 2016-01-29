@@ -33,7 +33,7 @@ feature 'Guest checkout' do
     variant2.stock_items.first.set_count_on_hand(1000)
     product.variants << [variant1, variant2]
   end
-  context 'product without variants' do
+  context 'product with variants' do
     scenario 'visit page and add to cart', js: true do
       visit '/products/example_product'
       expect(page).to have_content('Example Product')
