@@ -2,7 +2,7 @@ require "spec_helper"
 require "support/feature_spec_helper"
 
 feature "Guest checkout" do
-  let(:customer) { create(:user_with_addreses) } # sic
+  let(:customer) { create(:user) }
 
   before :all do
     create(:product, name: "Example Product", slug: "example_product")
