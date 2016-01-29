@@ -19,9 +19,9 @@ module Moneta
         # Massage source product data into spree product data
         def to_spree_attributes
           {
-            name: name,
-            sku: sku,
-            description: description,
+            name: @attributes[:name],
+            sku: @attributes[:sku],
+            description: @attributes[:description],
             # variants: source_product.variants.map{ |variant|
             #   {
             #     name: variant.name,
@@ -44,14 +44,18 @@ module Moneta
             #     spree_product
             #   )
             # ],
-            price: price,
-            shipping_category: shipping_category
+            price: @attributes[:price],
+            shipping_category: shipping_category(@attributes[:shipping_category_id])
           }
+        end
+
+        def name
+          @attributes[:name]
         end
 
         private
 
-        def shipping_category
+        def shipping_category(shipping_category_id)
           Spree::ShippingCategory.find(shipping_category_id) || Spree::ShippingCategory.find_or_create_by(name: "Default")
         end
       end

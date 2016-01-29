@@ -9,7 +9,7 @@ namespace :csv do
       rows = SmarterCSV.process(csv_file)
 
       rows.each do |row|
-        Moneta::ProductImporter.new(row).import
+        Moneta::Import::ProductImporter.new(row).import
       end
     end
   end
