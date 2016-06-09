@@ -1,3 +1,18 @@
+if feature_active?(:improved_reports)
+  Spree::Core::Engine.add_routes do
+    namespace :admin do
+      resources :reports, only: :index do
+        collection do
+          Rails.application.config.spree.reports.each do |report|
+            get report.to_s.demodulize.underscore.to_sym
+            post report.to_s.demodulize.underscore.to_sym
+          end
+        end
+      end
+    end
+  end
+end
+
 Rails.application.routes.draw do
 
   # This line mounts Spree's routes at the root of your application.
