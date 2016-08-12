@@ -5,7 +5,8 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
     - 'spec/fixtures/**/*'
-  RunRailsCops: true
+  Rails:
+    Enabled: true
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -18,3 +19,9 @@ Style/StringLiteralsInInterpolation:
   SupportedStyles:
     - single_quotes
     - double_quotes
+
+Style/DotPosition:
+  EnforcedStyle: trailing
+  SupportedStyles:
+    - leading
+    - trailing
