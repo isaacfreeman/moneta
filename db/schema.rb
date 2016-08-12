@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129063948) do
+ActiveRecord::Schema.define(version: 20160812032769) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
@@ -77,7 +78,7 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.boolean  "included",                                      default: false
     t.integer  "promotion_code_id"
     t.integer  "adjustment_reason_id"
-    t.boolean  "finalized"
+    t.boolean  "finalized",                                     default: false, null: false
   end
 
   add_index "spree_adjustments", ["adjustable_id", "adjustable_type"], name: "index_spree_adjustments_on_adjustable_id_and_adjustable_type", using: :btree
@@ -144,7 +145,10 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.integer  "numcode"
     t.boolean  "states_required", default: false
     t.datetime "updated_at"
+    t.datetime "created_at"
   end
+
+  add_index "spree_countries", ["iso"], name: "index_spree_countries_on_iso", using: :btree
 
   create_table "spree_credit_cards", force: :cascade do |t|
     t.string   "month"
@@ -215,7 +219,6 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.decimal  "additional_tax_total", precision: 10, scale: 2, default: 0.0
     t.decimal  "promo_total",          precision: 10, scale: 2, default: 0.0
     t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "pre_tax_amount",       precision: 12, scale: 4, default: 0.0, null: false
   end
 
   add_index "spree_line_items", ["order_id"], name: "index_spree_line_items_on_order_id", using: :btree
@@ -261,8 +264,10 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_index "spree_option_values", ["position"], name: "index_spree_option_values_on_position", using: :btree
 
   create_table "spree_option_values_variants", force: :cascade do |t|
-    t.integer "variant_id"
-    t.integer "option_value_id"
+    t.integer  "variant_id"
+    t.integer  "option_value_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_option_values_variants", ["variant_id", "option_value_id"], name: "index_option_values_variants_on_variant_id_and_option_value_id", using: :btree
@@ -364,6 +369,7 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.boolean  "auto_capture"
     t.text     "preferences"
     t.string   "preference_source"
+    t.integer  "position",          default: 0
   end
 
   add_index "spree_payment_methods", ["id", "type"], name: "index_spree_payment_methods_on_id_and_type", using: :btree
@@ -398,13 +404,17 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_index "spree_preferences", ["key"], name: "index_spree_preferences_on_key", unique: true, using: :btree
 
   create_table "spree_prices", force: :cascade do |t|
-    t.integer  "variant_id",                                         null: false
-    t.decimal  "amount",     precision: 10, scale: 2
+    t.integer  "variant_id",                                                    null: false
+    t.decimal  "amount",                precision: 10, scale: 2
     t.string   "currency"
     t.datetime "deleted_at"
-    t.boolean  "is_default",                          default: true, null: false
+    t.boolean  "is_default",                                     default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "country_iso", limit: 2
   end
 
+  add_index "spree_prices", ["country_iso"], name: "index_spree_prices_on_country_iso", using: :btree
   add_index "spree_prices", ["variant_id", "currency"], name: "index_spree_prices_on_variant_id_and_currency", using: :btree
 
   create_table "spree_product_option_types", force: :cascade do |t|
@@ -464,9 +474,11 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_index "spree_products", ["slug"], name: "index_spree_products_on_slug", unique: true, using: :btree
 
   create_table "spree_products_taxons", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "taxon_id"
-    t.integer "position"
+    t.integer  "product_id"
+    t.integer  "taxon_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_products_taxons", ["position"], name: "index_spree_products_taxons_on_position", using: :btree
@@ -474,9 +486,11 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_index "spree_products_taxons", ["taxon_id"], name: "index_spree_products_taxons_on_taxon_id", using: :btree
 
   create_table "spree_promotion_action_line_items", force: :cascade do |t|
-    t.integer "promotion_action_id"
-    t.integer "variant_id"
-    t.integer "quantity",            default: 1
+    t.integer  "promotion_action_id"
+    t.integer  "variant_id"
+    t.integer  "quantity",            default: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_promotion_action_line_items", ["promotion_action_id"], name: "index_spree_promotion_action_line_items_on_promotion_action_id", using: :btree
@@ -488,6 +502,8 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.string   "type"
     t.datetime "deleted_at"
     t.text     "preferences"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_promotion_actions", ["deleted_at"], name: "index_spree_promotion_actions_on_deleted_at", using: :btree
@@ -624,10 +640,12 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_index "spree_refunds", ["refund_reason_id"], name: "index_refunds_on_refund_reason_id", using: :btree
 
   create_table "spree_reimbursement_credits", force: :cascade do |t|
-    t.decimal "amount",           precision: 10, scale: 2, default: 0.0, null: false
-    t.integer "reimbursement_id"
-    t.integer "creditable_id"
-    t.string  "creditable_type"
+    t.decimal  "amount",           precision: 10, scale: 2, default: 0.0, null: false
+    t.integer  "reimbursement_id"
+    t.integer  "creditable_id"
+    t.string   "creditable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_reimbursement_types", force: :cascade do |t|
@@ -673,7 +691,7 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.integer  "exchange_variant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "pre_tax_amount",                  precision: 12, scale: 4, default: 0.0,  null: false
+    t.decimal  "amount",                          precision: 12, scale: 4, default: 0.0,  null: false
     t.decimal  "included_tax_total",              precision: 12, scale: 4, default: 0.0,  null: false
     t.decimal  "additional_tax_total",            precision: 12, scale: 4, default: 0.0,  null: false
     t.string   "reception_status"
@@ -700,7 +718,9 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   end
 
   create_table "spree_roles", force: :cascade do |t|
-    t.string "name"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_roles_users", force: :cascade do |t|
@@ -728,7 +748,6 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.decimal  "additional_tax_total", precision: 10, scale: 2, default: 0.0
     t.decimal  "promo_total",          precision: 10, scale: 2, default: 0.0
     t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "pre_tax_amount",       precision: 12, scale: 4, default: 0.0, null: false
   end
 
   add_index "spree_shipments", ["address_id"], name: "index_spree_shipments_on_address_id", using: :btree
@@ -752,6 +771,16 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_index "spree_shipping_method_categories", ["shipping_category_id", "shipping_method_id"], name: "unique_spree_shipping_method_categories", unique: true, using: :btree
   add_index "spree_shipping_method_categories", ["shipping_method_id"], name: "index_spree_shipping_method_categories_on_shipping_method_id", using: :btree
 
+  create_table "spree_shipping_method_stock_locations", force: :cascade do |t|
+    t.integer  "shipping_method_id"
+    t.integer  "stock_location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_shipping_method_stock_locations", ["shipping_method_id"], name: "shipping_method_id_spree_sm_sl", using: :btree
+  add_index "spree_shipping_method_stock_locations", ["stock_location_id"], name: "sstock_location_id_spree_sm_sl", using: :btree
+
   create_table "spree_shipping_method_zones", force: :cascade do |t|
     t.integer  "shipping_method_id"
     t.integer  "zone_id"
@@ -769,9 +798,23 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.string   "admin_name"
     t.integer  "tax_category_id"
     t.string   "code"
+    t.boolean  "available_to_all", default: true
+    t.string   "carrier"
+    t.string   "service_level"
   end
 
   add_index "spree_shipping_methods", ["tax_category_id"], name: "index_spree_shipping_methods_on_tax_category_id", using: :btree
+
+  create_table "spree_shipping_rate_taxes", force: :cascade do |t|
+    t.decimal  "amount",           precision: 8, scale: 2, default: 0.0, null: false
+    t.integer  "tax_rate_id"
+    t.integer  "shipping_rate_id"
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
+
+  add_index "spree_shipping_rate_taxes", ["shipping_rate_id"], name: "index_spree_shipping_rate_taxes_on_shipping_rate_id", using: :btree
+  add_index "spree_shipping_rate_taxes", ["tax_rate_id"], name: "index_spree_shipping_rate_taxes_on_tax_rate_id", using: :btree
 
   create_table "spree_shipping_rates", force: :cascade do |t|
     t.integer  "shipment_id"
@@ -804,6 +847,7 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.string   "abbr"
     t.integer  "country_id"
     t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "spree_states", ["country_id"], name: "index_spree_states_on_country_id", using: :btree
@@ -964,9 +1008,10 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.string   "mail_from_address"
     t.string   "default_currency"
     t.string   "code"
-    t.boolean  "default",           default: false, null: false
+    t.boolean  "default",              default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cart_tax_country_iso"
   end
 
   add_index "spree_stores", ["code"], name: "index_spree_stores_on_code", using: :btree
@@ -1131,10 +1176,12 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_index "spree_variant_property_rule_conditions", ["variant_property_rule_id", "option_value_id"], name: "index_spree_variant_prop_rule_conditions_on_rule_and_optval", using: :btree
 
   create_table "spree_variant_property_rule_values", force: :cascade do |t|
-    t.text    "value"
-    t.integer "position",                 default: 0
-    t.integer "property_id"
-    t.integer "variant_property_rule_id"
+    t.text     "value"
+    t.integer  "position",                 default: 0
+    t.integer  "property_id"
+    t.integer  "variant_property_rule_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_variant_property_rule_values", ["property_id"], name: "index_spree_variant_property_rule_values_on_property_id", using: :btree
@@ -1163,6 +1210,7 @@ ActiveRecord::Schema.define(version: 20160129063948) do
     t.boolean  "track_inventory",                          default: true
     t.integer  "tax_category_id"
     t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "spree_variants", ["position"], name: "index_spree_variants_on_position", using: :btree
@@ -1196,4 +1244,6 @@ ActiveRecord::Schema.define(version: 20160129063948) do
   add_foreign_key "spree_product_promotion_rules", "spree_promotion_rules", column: "promotion_rule_id"
   add_foreign_key "spree_prototype_taxons", "spree_prototypes", column: "prototype_id"
   add_foreign_key "spree_prototype_taxons", "spree_taxons", column: "taxon_id"
+  add_foreign_key "spree_shipping_method_stock_locations", "spree_shipping_methods", column: "shipping_method_id"
+  add_foreign_key "spree_shipping_method_stock_locations", "spree_stock_locations", column: "stock_location_id"
 end
