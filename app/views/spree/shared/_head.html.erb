@@ -8,11 +8,12 @@
 <%= stylesheet_link_tag 'application', :media => 'screen' %>
 <%= stylesheet_link_tag 'moneta/edit_buttons/manifest', :media => 'screen' if feature_active?(:edit_buttons) %>
 <%= stylesheet_link_tag 'moneta/menus/manifest', :media => 'screen' if feature_active?(:menus) %>
+<%= stylesheet_link_tag 'moneta/option_selection/manifest', :media => 'screen' if feature_active?(:option_selection) %>
 <%= csrf_meta_tags %>
 <%= javascript_include_tag 'application' %>
 <%= javascript_include_tag 'moneta/algolia_search/manifest' if feature_active?(:algolia_search) %>
-<%= javascript_include_tag 'moneta/edit_buttons/manifest' if feature_active?(:edit_buttons) %>
 <%= javascript_include_tag 'moneta/menus/manifest' if feature_active?(:menus) %>
+<%= javascript_include_tag 'moneta/option_selection/manifest' if feature_active?(:option_selection) %>
 <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
 <![endif]-->

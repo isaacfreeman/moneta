@@ -1,0 +1,6 @@
+<% if feature_active?(:option_selection) %>
+  <div id="product-options" data-hook="option_types">
+    <h6 class="product-section-title"><%= Spree.t(:options) %></h6>
+    <%= render partial: 'spree/option_types/option_types', locals: {f: f, product: @product} %>
+  </div>
+<% end %>

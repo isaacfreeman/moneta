@@ -1,0 +1,6 @@
+<% if feature_active?(:option_selection) %>
+  <div class='not_available' style='display: none;'>
+    Sorry, not available in this combination of
+    <%= @product.option_types.map(&:presentation).to_sentence.downcase %>.
+  </div>
+<% end %>
