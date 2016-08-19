@@ -1,0 +1,37 @@
+<% product.option_types.each do |ot| %>
+  <%
+    ot_name = ot.name.downcase.gsub(' ', '_')
+    option_values = product.active_option_values_for(ot)
+    hide_select = (ot.presentation.downcase == 'color' || option_values.count == 1)
+  %>
+  <div class="form-group">
+    <%= f.label ot.name, class: 'col-sm-1 control-label option_type', data: {option_type_id: ot.id} do %>
+      <%= ot.presentation %>
+    <% end %>
+    <% option_values_for_select = option_values.map{|ov| [ov.presentation, ov.name.downcase.gsub(' ', '_')]}.uniq %>
+    <div class='col-sm-11'>
+      <%= f.select ot.name, option_values_for_select, {}, {class: "option_type option_type-#{ot_name} form-control", data: {option_type_id: ot.id}, style: ('display: none;' if hide_select)} %>
+      <% if option_values.count == 1 %>
+        <p class='option_value-only'>
+          <%= option_values.first.presentation %>
+        </p>
+      <% end %>
+      <% if ot.presentation.downcase == 'color' %>
+        <ol class='option_type option_type-color' data-option-type-name="<%= ot_name %>">
+          <% option_values.each_with_index do |ov, i| %>
+            <%# next if variant.images.none? %>
+            <%# ov = variant.option_value_for(ot) %>
+            <%# next unless ov.present? %>
+            <li>
+              <a href="#" class="option_value <%= 'active' if i == 0 %>"" title="<%= ov.presentation %>" data-option-value-name='<%= ov.name.downcase.gsub(' ', '_') %>'>
+                <%# image = variant.images.first %>
+                <%#= image_tag(image.attachment.url(:mini), alt: image.alt) %>
+                <%= ov.name %>
+              </a>
+            </li>
+          <% end %>
+        </ol>
+      <% end %>
+    </div>
+  </div>
+<% end %>

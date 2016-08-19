@@ -1,0 +1,19 @@
+$border-color:          #d9d9db;
+$border-color-selected: #00adee;
+
+.option_type {
+  clear: left;
+  li {
+    display: inline-block;
+    list-style: none;
+    a {
+      border: 1px solid $border-color;
+      display: block;
+      margin-right: 6px;
+      padding: 1em;
+      &.active {
+        border-color: $border-color-selected;
+      }
+    }
+  }
+}
