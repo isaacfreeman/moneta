@@ -15,3 +15,4 @@ Rails.application.config.assets.precompile += %w( moneta/algolia_search/manifest
 Rails.application.config.assets.precompile += %w( moneta/edit_buttons/manifest.js moneta/edit_buttons/manifest.css )
 Rails.application.config.assets.precompile += %w( moneta/menus/manifest.js moneta/menus/manifest.css )
 Rails.application.config.assets.precompile += %w( moneta/option_selection/manifest.js moneta/option_selection/manifest.css )
+Rails.application.config.assets.precompile += %w( moneta/one_page_checkout/manifest.js moneta/one_page_checkout/manifest.css )

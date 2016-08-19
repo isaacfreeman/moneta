@@ -8,6 +8,8 @@ A Resolve Digital template for Solidus sites, with the following goals:
 2. Checkout specs
 3. Edit buttons on the front end for admins
 4. Import products from CSV
+5. Select variants by options (instead of having a big list of all variants)
+6. One-page checkout (credit: http://nebulab.it/blog/one-page-checkout-with-spree/ for initial idea)
 
 ## Notes
 - Features are built against standard Solidus. In particular, we sometimes rely on the presence of HTML classes and ids from Solidus-frontend views, which may have been changed in client projects. In general, we recommend retaining ids, data-hooks and semantically meaningful classes from Solidus when overriding views.

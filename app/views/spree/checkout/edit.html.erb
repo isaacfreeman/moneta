@@ -1,0 +1,22 @@
+<div id="checkout" data-hook>
+
+  <div class="row" data-hook="checkout_header">
+    <h1 class="columns three alpha" data-hook="checkout_title"><%= Spree.t(:checkout) %></h1>
+    <div class="columns thirteen omega" data-hook="checkout_progress"><%= checkout_progress %></div>
+  </div>
+
+  <% @order.checkout_steps[0...-1].each do |state| %>
+    <div class="row checkout_content <%= 'disabled-step' if state != @order.state %>" data-step="<%= state %>"data-hook="checkout_content" id="checkout_<%= state %>">
+      <%= render :partial => 'form_wrapper', :locals => { :order => @order, :state => state } %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+Spree.current_order_id = "<%= @order.number %>"
+Spree.current_order_token = "<%= @order.guest_token %>"
+</script>
+
+<% if I18n.locale != :en %>
+  <%= javascript_include_tag 'jquery.validate/localization/messages_' + I18n.locale.to_s.downcase.gsub('-', '') %>
+<% end %>
