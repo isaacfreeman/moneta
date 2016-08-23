@@ -1,5 +1,5 @@
-ruby '2.2.5'
-source 'https://rubygems.org'
+ruby "2.3.1"
+source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'lograge'
 
-gem 'solidus'
+gem "solidus", github: "solidusio/solidus", branch: "v1.4"
 gem 'solidus_auth_devise'
 
 # Use ActiveModel has_secure_password

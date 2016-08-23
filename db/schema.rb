@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812032769) do
+ActiveRecord::Schema.define(version: 20160823101346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -539,7 +539,6 @@ ActiveRecord::Schema.define(version: 20160812032769) do
 
   create_table "spree_promotion_rules", force: :cascade do |t|
     t.integer  "promotion_id"
-    t.integer  "user_id"
     t.integer  "product_group_id"
     t.string   "type"
     t.datetime "created_at"
@@ -550,7 +549,6 @@ ActiveRecord::Schema.define(version: 20160812032769) do
 
   add_index "spree_promotion_rules", ["product_group_id"], name: "index_promotion_rules_on_product_group_id", using: :btree
   add_index "spree_promotion_rules", ["promotion_id"], name: "index_spree_promotion_rules_on_promotion_id", using: :btree
-  add_index "spree_promotion_rules", ["user_id"], name: "index_promotion_rules_on_user_id", using: :btree
 
   create_table "spree_promotion_rules_users", force: :cascade do |t|
     t.integer  "user_id"
@@ -637,7 +635,9 @@ ActiveRecord::Schema.define(version: 20160812032769) do
     t.integer  "reimbursement_id"
   end
 
+  add_index "spree_refunds", ["payment_id"], name: "index_spree_refunds_on_payment_id", using: :btree
   add_index "spree_refunds", ["refund_reason_id"], name: "index_refunds_on_refund_reason_id", using: :btree
+  add_index "spree_refunds", ["reimbursement_id"], name: "index_spree_refunds_on_reimbursement_id", using: :btree
 
   create_table "spree_reimbursement_credits", force: :cascade do |t|
     t.decimal  "amount",           precision: 10, scale: 2, default: 0.0, null: false
@@ -736,21 +736,21 @@ ActiveRecord::Schema.define(version: 20160812032769) do
   create_table "spree_shipments", force: :cascade do |t|
     t.string   "tracking"
     t.string   "number"
-    t.decimal  "cost",                 precision: 10, scale: 2, default: 0.0
+    t.decimal  "cost",                  precision: 10, scale: 2, default: 0.0
     t.datetime "shipped_at"
     t.integer  "order_id"
-    t.integer  "address_id"
+    t.integer  "deprecated_address_id"
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stock_location_id"
-    t.decimal  "adjustment_total",     precision: 10, scale: 2, default: 0.0
-    t.decimal  "additional_tax_total", precision: 10, scale: 2, default: 0.0
-    t.decimal  "promo_total",          precision: 10, scale: 2, default: 0.0
-    t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
+    t.decimal  "adjustment_total",      precision: 10, scale: 2, default: 0.0
+    t.decimal  "additional_tax_total",  precision: 10, scale: 2, default: 0.0
+    t.decimal  "promo_total",           precision: 10, scale: 2, default: 0.0
+    t.decimal  "included_tax_total",    precision: 10, scale: 2, default: 0.0, null: false
   end
 
-  add_index "spree_shipments", ["address_id"], name: "index_spree_shipments_on_address_id", using: :btree
+  add_index "spree_shipments", ["deprecated_address_id"], name: "index_spree_shipments_on_deprecated_address_id", using: :btree
   add_index "spree_shipments", ["number"], name: "index_shipments_on_number", using: :btree
   add_index "spree_shipments", ["order_id"], name: "index_spree_shipments_on_order_id", using: :btree
   add_index "spree_shipments", ["stock_location_id"], name: "index_spree_shipments_on_stock_location_id", using: :btree

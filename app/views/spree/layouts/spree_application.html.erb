@@ -16,7 +16,7 @@
       <div id="wrapper" class="row" data-hook>
         <%= render :partial => 'moneta/shared/menus/primary' if feature_active?(:menus) %>
 
-        <%= breadcrumbs(@taxon) %>
+        <%= taxon_breadcrumbs(@taxon) %>
 
         <%= render :partial => 'spree/shared/sidebar' if content_for? :sidebar %>
 
