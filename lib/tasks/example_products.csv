@@ -1,3 +1,3 @@
-name,sku,price,shipping_category_id
-Existing Product,existing-product,10.00,1
-Bar,bar-1,20.00,1
+sku,name,description,available_on,meta_title,meta_description,meta_keywords,tax_category,shipping_category,price,cost_price,stock,width,height,depth,weight,properties,taxons,images
+SKU-001,T-Shirt,An example product,2011-02-14,Meta Title,Meta Description,Meta Keywords,default,default,10.00,5.00,10,1.2,2.4,0.2,0.8,"{""material"":""cotton"",""neck"":""vee""}","Clothing,Clothing>Shirts,Brand>ACME Products International","https://upload.wikimedia.org/wikipedia/commons/8/8b/Nestor_notabilis_-Mount_Aspiring_National_Park%2C_New_Zealand-8.jpg,https://upload.wikimedia.org/wikipedia/commons/3/39/Kaka_%28Nestor_meridionalis%29-_Wellington_-NZ-8.jpg"
+SKU-002,,"This row will fail, as it doesn't have a product name",,,,,,,,,,,,,,,,

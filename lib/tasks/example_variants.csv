@@ -1,0 +1,4 @@
+sku,product_sku,options,price,cost_price,stock,width,height,depth,weight,images
+SKU-001-a,SKU-001,"color:red,size:large",10.00,5.00,19,1.2,2.4,0.2,0.8,"https://upload.wikimedia.org/wikipedia/commons/8/8b/Nestor_notabilis_-Mount_Aspiring_National_Park%2C_New_Zealand-8.jpg,https://upload.wikimedia.org/wikipedia/commons/3/39/Kaka_%28Nestor_meridionalis%29-_Wellington_-NZ-8.jpg"
+SKU-001-b,SKU-001,"color:green,size:small",9.00,4.50,21,1.2,2.4,0.2,0.8,"https://upload.wikimedia.org/wikipedia/commons/8/8b/Nestor_notabilis_-Mount_Aspiring_National_Park%2C_New_Zealand-8.jpg,https://upload.wikimedia.org/wikipedia/commons/3/39/Kaka_%28Nestor_meridionalis%29-_Wellington_-NZ-8.jpg"
+SKU-001-c,nonexistent-sku,,,,,,,,,
