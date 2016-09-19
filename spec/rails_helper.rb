@@ -6,13 +6,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'spree/testing_support/authorization_helpers'
-require 'spree/testing_support/capybara_ext'
-require 'spree/testing_support/controller_requests'
-require 'spree/testing_support/factories'
-require 'spree/testing_support/flash'
-require 'spree/testing_support/preferences'
-require 'spree/testing_support/url_helpers'
 require 'support/database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

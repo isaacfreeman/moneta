@@ -1,4 +1,5 @@
 require "rails_helper"
+require "support/solidus_helper"
 require "support/capybara_helper"
 
 feature "Guest checkout" do
