@@ -110,5 +110,7 @@ $(document).on 'ready turbolinks:load', ->
     variantSelector = new VariantSelector(productForm)
     $('.option_type-color').each ->
       new SwatchSelector($(this), productForm, variantSelector)
-    # TODO: Update also on regular select changes
+    $('select.option_type').on 'change', ->
+      # TODO: Check whether this can cause duplicate updates
+      variantSelector.updateVariantsDisplay()
     variantSelector.updateVariantsDisplay()
