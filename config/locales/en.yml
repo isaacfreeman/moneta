@@ -20,6 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  no_products_found: 'No products found'
-  stock_management: 'Stock Management'
-  view_product: 'View Product'
+  no_products_found: "No products found"
+  stock_management: "Stock Management"
+  view_product: "View Product"
+  options: "Options"
+  out_of_stock: "Out of stock"

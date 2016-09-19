@@ -2,7 +2,7 @@ ruby "2.3.1"
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem "rails", "~> 5.0"
 
 gem 'pg'
 
@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'lograge'
 
-gem "solidus", github: "solidusio/solidus", branch: "v1.4"
+gem "solidus", github: "solidusio/solidus", branch: "v2.0"
 gem 'solidus_auth_devise'
 
 # Use ActiveModel has_secure_password
@@ -45,9 +45,9 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'dotenv-rails'
-  gem 'factory_girl_rails'
+  gem "factory_girl_rails"
   gem 'ffaker'
-  gem 'i18n-tasks'
+  gem "i18n-tasks"
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'pry-remote'
@@ -58,15 +58,15 @@ group :development do
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'quiet_assets'
+  # gem "quiet_assets"
 end
 
 group :test do
   gem 'rspec-rails'
-  gem 'capybara'
+  gem 'capybara', github: "jnicklas/capybara", branch: "master"
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'poltergeist'
-  gem 'simplecov', :require => false
+  gem "simplecov", require: false
 end

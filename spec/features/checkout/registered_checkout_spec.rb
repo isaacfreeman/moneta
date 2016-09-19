@@ -1,14 +1,17 @@
-require "spec_helper"
-require "support/feature_spec_helper"
+require "rails_helper"
+require "support/capybara_helper"
 
 feature "Guest checkout" do
+  let!(:store) { create(:store) }
+  let!(:country) { create(:country, states_required: true) }
+  let!(:state) { create(:state, country: country) }
+  let!(:shipping_method) { create(:shipping_method, name: "Shipping Method 1") }
+  let!(:product) { create(:product, name: "Example Product", slug: "example_product") }
+  let!(:payment_method) { create(:credit_card_payment_method, name: "Payment Method 1") }
   let(:customer) { create(:user) }
 
-  before :all do
-    create(:product, name: "Example Product", slug: "example_product")
-    create(:shipping_method, name: "Shipping Method 1")
+  before do
     Spree::Config.company = true
-    create(:credit_card_payment_method, name: "Payment Method 1")
   end
 
   scenario "purchase a product", js: true do
