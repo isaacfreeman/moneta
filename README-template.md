@@ -96,7 +96,7 @@ After running tests, code coverage will be available in the `coverage/index.html
 ```bash
 rake test
 ```
-## Grant a User Access to Spree Admin
+## Grant a User Access to Solidus Admin
 ```
 u = User.find(5)
 u.spree_roles << Spree::Role.where(name:"admin").first

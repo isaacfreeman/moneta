@@ -5,7 +5,11 @@ Spree::Variant.class_eval do
     ot = case option_type
          when String then Spree::OptionType.find_by_name option_type
          when Spree::OptionType then option_type
-         else raise ArgumentError
+         else
+           raise(
+             ArgumentError,
+             "Argument must be an OptionType or String naming an OptionType"
+           )
          end
     option_values.detect { |ov| ov.option_type == ot }
   end

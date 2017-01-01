@@ -86,9 +86,17 @@ describe Import::VariantImporter do
         end
       end
       context "404 retrieving image" do
-        subject { Import::VariantImporter.new(attributes_with_unavailable_image) }
+        subject do
+          Import::VariantImporter.new(
+            spree_product,
+            attributes_with_unavailable_image
+          )
+        end
         it "fails gracefully" do
-          expect { subject.import }.to raise_error
+          expect { subject.import }.to raise_error(
+            OpenURI::HTTPError,
+            "404 Not Found"
+          )
         end
       end
     end

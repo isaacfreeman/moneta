@@ -72,7 +72,10 @@ describe Import::ProductImporter do
       context "Invalid attributes" do
         subject { Import::ProductImporter.new(invalid_attributes) }
         it "Fails gracefully, so we can move on to the next product" do
-          expect { subject.import }.to raise_error
+          expect { subject.import }.to raise_error(
+            ActiveRecord::RecordInvalid,
+            "Validation failed: Name can't be blank"
+          )
         end
       end
     end
@@ -98,13 +101,20 @@ describe Import::ProductImporter do
           expect(@spree_product.images.count).to eq 2
           expect(
             @spree_product.images.first.attachment_file_name
-          ).to eq "Nestor_notabilis_-Mount_Aspiring_National_Park_2C_New_Zealand-8.jpg"
+          ).to eq(
+            "Nestor_notabilis_-Mount_Aspiring_National_Park_2C_New_Zealand-8.jpg"
+          )
         end
       end
       context "404 retrieving image" do
-        subject { Import::ProductImporter.new(attributes_with_unavailable_image) }
+        subject do
+          Import::ProductImporter.new(attributes_with_unavailable_image)
+        end
         it "fails gracefully" do
-          expect { subject.import }.to raise_error
+          expect { subject.import }.to raise_error(
+            OpenURI::HTTPError,
+            "404 Not Found"
+          )
         end
       end
     end
